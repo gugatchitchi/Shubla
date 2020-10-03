@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/screens.dart';
+import 'configs/configs.dart';
 
 void main() {
   runApp(App());
@@ -11,13 +12,14 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Shubla',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        backgroundColor: Colors.yellow,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      // theme: ThemeData(
+      //   primarySwatch: Colors.blue,
+      //   backgroundColor: Colors.yellow,
+      //   visualDensity: VisualDensity.adaptivePlatformDensity,
+      // ),
       home: Scaffold(
-        body: Quiz(),
+        backgroundColor: Palette.bg,
+        body: Categories(),
       ),
     );
   }

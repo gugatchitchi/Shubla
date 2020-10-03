@@ -14,7 +14,33 @@ class Result extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('Result: $answeredQuestions / $totalQuestions'),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Result: $answeredQuestions / $totalQuestions'),
+          SizedBox(height: 20.0),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FlatButton(
+                onPressed: () {},
+                color: Colors.green,
+                textColor: Colors.black,
+                padding: EdgeInsets.all(20.0),
+                child: Text("Restart"),
+              ),
+              SizedBox(width: 30.0),
+              FlatButton(
+                onPressed: () {},
+                color: Colors.yellow,
+                textColor: Colors.black,
+                padding: EdgeInsets.all(20.0),
+                child: Text("Categories"),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
