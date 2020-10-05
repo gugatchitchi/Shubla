@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:shubla/configs/configs.dart';
 import 'package:shubla/widgets/widgets.dart';
@@ -53,9 +52,10 @@ class _QuizState extends State<Quiz> {
   // initilize timer
   Timer _timer;
   // how many seconds should timer go
-  int _timeLeft = 60;
+  int _timeLeft;
   // start the timer
   void startTimer() {
+    _timeLeft = 60;
     const oneSec = const Duration(seconds: 1);
     _timer = new Timer.periodic(
       oneSec,
@@ -63,14 +63,20 @@ class _QuizState extends State<Quiz> {
         () {
           if (_timeLeft < 1) {
             timer.cancel();
-            print('timer over');
           } else {
             _timeLeft = _timeLeft - 1;
-            print("time left: $_timeLeft");
           }
         },
       ),
     );
+  }
+
+  // Restart the game
+  void restart() {
+    _skippedQuestions = 0;
+    _answeredQuestions = 0;
+    _randomQuestions = getQuestions();
+    startTimer();
   }
 
   // Start the timer and create questions list
@@ -100,31 +106,29 @@ class _QuizState extends State<Quiz> {
     // return a widget
     return Scaffold(
       backgroundColor: Palette.bg,
-      body: Stack(children: [
-        Positioned(
-          right: (SizeConfig.safeBlockHorizontal * 100 - 60) / 60 * _timeLeft,
-          bottom: 0.0,
-          child: QuizTimer(
-            secondsLeft: _timeLeft,
-          ),
-        ),
-        Question(
-          question:
-              _randomQuestions.length > _skippedQuestions + _answeredQuestions
+      body: _timeLeft != 0
+          ? Question(
+              timeLeft: _timeLeft,
+              question: _randomQuestions.length >
+                      _skippedQuestions + _answeredQuestions
                   ? _randomQuestions[_skippedQuestions + _answeredQuestions]
                   : 'მეტი შეკითხვა აღარ გვაქვს',
-          onTapSkip: () {
-            setState(() {
-              _skippedQuestions++;
-            });
-          },
-          onTapNext: () {
-            setState(() {
-              _answeredQuestions++;
-            });
-          },
-        ),
-      ]),
+              onTapSkip: () {
+                setState(() {
+                  _skippedQuestions++;
+                });
+              },
+              onTapNext: () {
+                setState(() {
+                  _answeredQuestions++;
+                });
+              },
+            )
+          : QuizResult(
+              answeredQuestions: _answeredQuestions,
+              skippedQuestions: _skippedQuestions,
+              restart: restart,
+            ),
     );
   }
 }
