@@ -100,22 +100,31 @@ class _QuizState extends State<Quiz> {
     // return a widget
     return Scaffold(
       backgroundColor: Palette.bg,
-      body: Question(
-        question: widget.questions.length >= _randomQuestions.length
-            ? 'მეტი შეკითხვა აღარ გვქავს'
-            : _randomQuestions[_skippedQuestions + _answeredQuestions],
-        onTapSkip: () {
-          setState(() {
-            _skippedQuestions++;
-          });
-        },
-        onTapNext: () {
-          setState(() {
-            _answeredQuestions++;
-          });
-        },
-        // timer: _timeLeft,
-      ),
+      body: Stack(children: [
+        Positioned(
+          right: (SizeConfig.safeBlockHorizontal * 100 - 60) / 60 * _timeLeft,
+          bottom: 0.0,
+          child: QuizTimer(
+            secondsLeft: _timeLeft,
+          ),
+        ),
+        Question(
+          question:
+              _randomQuestions.length > _skippedQuestions + _answeredQuestions
+                  ? _randomQuestions[_skippedQuestions + _answeredQuestions]
+                  : 'მეტი შეკითხვა აღარ გვაქვს',
+          onTapSkip: () {
+            setState(() {
+              _skippedQuestions++;
+            });
+          },
+          onTapNext: () {
+            setState(() {
+              _answeredQuestions++;
+            });
+          },
+        ),
+      ]),
     );
   }
 }
