@@ -2,16 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shubla/configs/configs.dart';
 import 'package:shubla/widgets/widgets.dart';
+import 'package:shubla/screens/screens.dart';
+import 'package:shubla/database/data.dart';
 
 class Categories extends StatelessWidget {
   const Categories({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // Enforce portrait oriantation
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-    ]);
     return Stack(
       children: [
         // Circles all around the screen
@@ -68,65 +66,111 @@ class Categories extends StatelessWidget {
         // It is all the content on this page
         CustomScrollView(
           slivers: [
+            // Title
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.only(top: 50.0),
+                padding: const EdgeInsets.only(top: 100.0),
                 child: CategoriesTitle(
                   title: 'კატეგორიები',
                   descrip: 'აირჩიე კატეგორია და დაიწყე თამაში',
                 ),
               ),
             ),
+            // Cards
             SliverToBoxAdapter(
-              // Row consists of two columns - left and right
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // Left Column
-                  // it has additional spacer on the top to
-                  // move it down a little bit
-                  Column(
-                    children: [
-                      // top margin
-                      SizedBox(height: 100.0),
-                      // card
-                      CategoriesCard(
-                        imageName: 'animals',
-                        text: 'ცხოველები',
-                        color: Palette.accent_orange,
-                      ),
-                      // Spacer between cards
-                      SizedBox(height: 20.0),
-                      // card
-                      CategoriesCard(
-                        imageName: 'movies',
-                        text: 'ფილმები',
-                        color: Palette.accent_blue,
-                      ),
-                    ],
-                  ),
-                  // Spacer between columns
-                  SizedBox(width: 20.0),
-                  // Right Column
-                  Column(
-                    children: [
-                      // card
-                      CategoriesCard(
-                        imageName: 'countries',
-                        text: 'ქვეყნები',
-                        color: Palette.accent_yellow,
-                      ),
-                      // Spacer between cards
-                      SizedBox(height: 20.0),
-                      // card
-                      CategoriesCard(
-                        imageName: 'celebrities',
-                        text: 'ადამიანები',
-                        color: Palette.accent_pink,
-                      ),
-                    ],
-                  ),
-                ],
+              // We add padding to the bottom of the categories
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 100.0),
+                // Row consists of two columns - left and right
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // Left Column
+                    // it has additional spacer on the top to
+                    // move it down a little bit
+                    Column(
+                      children: [
+                        // top margin
+                        SizedBox(height: 100.0),
+                        // card
+                        CategoriesCard(
+                          imageName: 'animals',
+                          text: 'ცხოველები',
+                          color: Palette.accent_orange,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) {
+                                return Quiz(
+                                  questions: questionsAnimals,
+                                );
+                              }),
+                            );
+                          },
+                        ),
+                        // Spacer between cards
+                        SizedBox(height: 20.0),
+                        // card
+                        CategoriesCard(
+                          imageName: 'movies',
+                          text: 'ფილმები',
+                          color: Palette.accent_blue,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) {
+                                return Quiz(
+                                  questions: questionsMovies,
+                                );
+                              }),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                    // Spacer between columns
+                    SizedBox(width: 20.0),
+                    // Right Column
+                    Column(
+                      children: [
+                        // card
+                        CategoriesCard(
+                          imageName: 'countries',
+                          text: 'ქვეყნები',
+                          color: Palette.accent_yellow,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) {
+                                return Quiz(
+                                  questions: questionsCountries,
+                                );
+                              }),
+                            );
+                          },
+                        ),
+                        // Spacer between cards
+                        SizedBox(height: 20.0),
+                        // card
+                        CategoriesCard(
+                          imageName: 'celebrities',
+                          text: 'ადამიანები',
+                          color: Palette.accent_pink,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) {
+                                return Quiz(
+                                  questions: questionsCelebrities,
+                                );
+                              }),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

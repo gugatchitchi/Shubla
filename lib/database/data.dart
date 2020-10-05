@@ -1,13 +1,5 @@
 import 'models.dart';
 
-// TODO: delete this
-const countries = [
-  'ქვეყნები',
-  'ცნობილი ადამიანები',
-  'ცხოველები',
-  'ფილმები',
-];
-
 // Questions for the category - animals
 final List<String> questionsAnimals = [
   'ლომი',

@@ -5,11 +5,13 @@ class CategoriesCard extends StatelessWidget {
   final String imageName;
   final String text;
   final Color color;
+  final Function onTap;
   const CategoriesCard({
     Key key,
     @required this.imageName,
     @required this.text,
     @required this.color,
+    @required this.onTap,
   }) : super(key: key);
 
   @override
@@ -27,9 +29,7 @@ class CategoriesCard extends StatelessWidget {
         padding: const EdgeInsets.all(5.0),
         child: InkWell(
           splashColor: Palette.bg,
-          onTap: () {
-            print('Card tapped.');
-          },
+          onTap: onTap,
           child: Column(
             children: [
               Container(
