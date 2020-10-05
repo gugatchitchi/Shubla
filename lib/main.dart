@@ -12,11 +12,6 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Shubla',
       debugShowCheckedModeBanner: false,
-      // theme: ThemeData(
-      //   primarySwatch: Colors.blue,
-      //   backgroundColor: Colors.yellow,
-      //   visualDensity: VisualDensity.adaptivePlatformDensity,
-      // ),
       home: Scaffold(
         backgroundColor: Palette.bg,
         body: Categories(),

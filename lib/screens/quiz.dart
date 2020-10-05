@@ -82,6 +82,12 @@ class _QuizState extends State<Quiz> {
   // Start the timer and create questions list
   @override
   void initState() {
+    // Enforce landscape oriantation
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+
     _randomQuestions = getQuestions();
     startTimer();
     super.initState();
@@ -90,17 +96,16 @@ class _QuizState extends State<Quiz> {
   // Dispose everything
   @override
   void dispose() {
+    // Enforce landscape oriantation
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
     _timer.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // Enforce landscape oriantation
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
     // It let us use relative sizes, ex: 40% of the width
     SizeConfig().init(context);
     // return a widget

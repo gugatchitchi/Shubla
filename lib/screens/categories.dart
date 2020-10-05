@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:shubla/configs/configs.dart';
 import 'package:shubla/widgets/widgets.dart';
 import 'package:shubla/screens/screens.dart';
