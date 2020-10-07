@@ -10,17 +10,28 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.0
-  sensors: ^0.4.2+5
+  # sensors: ^0.4.2+5
+  # audioplayers: ^0.16.1
+
+# dev_dependencies:
+#   flutter_launcher_icons: "^0.8.0"
+# flutter_test:
+#   sdk: flutter
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+  flutter_launcher_icons: "^0.8.0"
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icons/logo.png"
 
 flutter:
   uses-material-design: true
 
   assets:
     - assets/images/
+    - assets/sounds/tick-tock.wav
 
   fonts:
     - family: Georgian

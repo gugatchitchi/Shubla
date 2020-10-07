@@ -4,6 +4,8 @@ import 'package:shubla/configs/configs.dart';
 import 'package:shubla/widgets/widgets.dart';
 import 'dart:math';
 import 'dart:async';
+// import 'package:audioplayers/audio_cache.dart';
+// import 'package:audioplayers/audioplayers.dart';
 
 // Widget has two main views: a question and a result
 // if user has more questions two answer widget will return
@@ -21,12 +23,15 @@ class _QuizState extends State<Quiz> {
   int _skippedQuestions = 0;
   int _answeredQuestions = 0;
 
-  // these are the questions we want to ask to user
-  List<String> _randomQuestions = [];
+  // AudioCache audioCache = AudioCache();
+  // AudioPlayer audioPlayer = AudioPlayer(mode: PlayerMode.LOW_LATENCY);
 
   // we want user to see questions randomly every time one chooses the category
   // therefore we use random library and function below to generate questions
   // list rendomly
+  // these are the questions we want to ask to user
+  List<String> _randomQuestions = [];
+  // initialize random widget
   final _random = new Random();
   // generates positive integer between min and max values
   int next(int min, int max) => min + _random.nextInt(max - min);
@@ -79,6 +84,12 @@ class _QuizState extends State<Quiz> {
     startTimer();
   }
 
+  // // / Add Audio
+  // Future<AudioPlayer> playLocalAsset() async {
+  //   AudioCache cache = new AudioCache();
+  //   return await cache.play("tick-tock.wav");
+  // }
+
   // Start the timer and create questions list
   @override
   void initState() {
@@ -87,8 +98,8 @@ class _QuizState extends State<Quiz> {
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
-
     _randomQuestions = getQuestions();
+    // playLocalAsset();
     startTimer();
     super.initState();
   }
